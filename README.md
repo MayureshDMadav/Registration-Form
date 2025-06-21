@@ -55,6 +55,7 @@ cd todolist
 
 ```bash
 DB_URL = "Your DB URL"
+secrets = "Your Secrets"
 ```
 3. CMD to install dependencies
    
