@@ -8,7 +8,6 @@ A simple yet functional To-Do List web application built using **Node.js**, **Ex
 
 - ✅ Login
 - ✅ Registration
-- 
 ---
 
 ## 🛠️ Tech Stack
