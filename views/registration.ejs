@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="container">
-      <span class="badge badge-pill badge-light">Registration Page</span>  
+      <span class="badge badge-pill badge-light">Registration Page</span>
       <div class="card" style="width: 35rem">
         <img
           class="card-img-top"
@@ -22,7 +22,7 @@
           alt="Card image cap"
         />
         <div class="card-body">
-          <form method="post" action="/resgistration">
+          <form method="post" action="/resgistration" id="form">
             <div class="form-group">
               <label for="exampleInputEmail">Email address</label>
               <input
@@ -47,13 +47,15 @@
                   id="password"
                   name="password"
                   placeholder="Password"
-                  min="8"
-                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,8}$"
-                  title="Password must be 6-8 characters, include a lowercase letter, an uppercase letter, and a number."
+                  min="8"                
                 />
                 <div class="input-group-append">
                   <span class="input-group-text" id="basic-addon2">show</span>
                 </div>
+              </div>
+              <div id="pass_err" class="alert alert-danger" role="alert" style="display: none;">
+                Password must be 6-8 characters, include a lowercase letter, an
+                uppercase letter, and a number.
               </div>
             </div>
             <button type="submit" class="btn btn-success">Register Now</button>
