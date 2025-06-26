@@ -16,7 +16,7 @@
     <div class="container">
       <span class="badge badge-pill badge-light">Login Page</span>
       <% if (invalidUser) {%>
-      <div class="alert alert-danger" role="alert" id="error-container" >
+      <div class="alert alert-danger" role="alert" id="error-container">
         Invalid Credentials Please try Again !!
       </div>
       <% } %>
@@ -27,7 +27,7 @@
           alt="Card image cap"
         />
         <div class="card-body">
-          <form action="/login" method="post">
+          <form action="/login" method="post" id="form">
             <div class="form-group">
               <label for="exampleInputEmail">Email address</label>
               <input
@@ -53,13 +53,14 @@
                   name="password"
                   placeholder="Password"
                   min="8"
-                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,8}$"
-                  title="Password must be 6-8 characters, include a lowercase letter, an uppercase letter, and a number."
-                  
                 />
                 <div class="input-group-append">
                   <span class="input-group-text" id="basic-addon2">show</span>
                 </div>
+              </div>
+              <div id="pass_err" class="alert alert-danger" role="alert" style="display: none;">
+                Password must be 6-8 characters, include a lowercase letter, an
+                uppercase letter, and a number.
               </div>
             </div>
             <button type="submit" class="btn btn-success">Login Now</button>
