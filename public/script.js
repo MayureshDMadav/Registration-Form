@@ -1,5 +1,18 @@
 const showBtn = document.querySelector("#basic-addon2");
 const inputPass = document.querySelector("input[name='password']");
+const form = document.querySelector("#form");
+const passErr = document.querySelector("#pass_err");
+
+form &&
+  form.addEventListener("submit", (event) => {
+    const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,8}$/;
+    if (pattern.test(inputPass.value)) {
+      passErr.style.display = "none";
+    } else {
+      passErr.style.display = "block";
+      event.preventDefault();
+    }
+  });
 
 showBtn &&
   showBtn.addEventListener("click", () => {
