@@ -8,23 +8,36 @@ app.use(express.json());
 app.set("view engine", "ejs");
 
 let userLogin = false;
+let userLoggedIn = false;
 
 app.get("/", (req, res) => {
+  userLoggedIn = false;
   setTimeout(() => {
     if (userLogin) {
-      res.render("secretpage", { userLoggedIn: true });
+      userLoggedIn = true;
+      res.redirect("/secretPage");
+      return;
     } else {
       res.render("index", { alreadyUser: false });
+      return;
     }
   }, 250);
 });
 
 app.get("/login", (req, res) => {
-  res.render("login", { invalidUser: false });
+  if (userLoggedIn) {
+    res.redirect("/secretPage");
+  } else {
+    res.render("login", { invalidUser: false });
+  }
 });
 
 app.get("/resgistration", (req, res) => {
-  res.render("registration");
+  if (userLoggedIn) {
+    res.redirect("/secretPage");
+  } else {
+    res.render("registration");
+  }
 });
 
 app.get("/errorPage", (req, res) => {
@@ -35,8 +48,10 @@ app.post("/allowUser", (req, res) => {
   const loggedIn = req.body["log"];
   if (loggedIn) {
     userLogin = true;
+    userLoggedIn = true;
   } else {
     userLogin = false;
+    userLoggedIn = false;
   }
   return;
 });
@@ -48,7 +63,8 @@ app.post("/login", async (req, res) => {
     const findUserInDb = await database.findOne({ emailId: emailId });
     if (findUserInDb) {
       if (findUserInDb.password === password) {
-        res.render("secretpage", { userLoggedIn: true });
+        userLoggedIn = true;
+        res.redirect("/secretPage");
         return;
       } else {
         res.render("login", { invalidUser: true });
@@ -59,6 +75,15 @@ app.post("/login", async (req, res) => {
       return;
     }
   } catch (e) {
+    res.redirect("/errorPage");
+    return;
+  }
+});
+
+app.get("/secretPage", (req, res) => {
+  if (userLoggedIn) {
+    res.render("secretpage", { userLoggedIn: true });
+  } else {
     res.redirect("/errorPage");
     return;
   }
@@ -81,7 +106,8 @@ app.post("/resgistration", async (req, res) => {
       password: password,
     });
     if (newUserRegister) {
-      res.render("secretpage", { userLoggedIn: true });
+      userLoggedIn = true;
+      res.redirect("/secretPage");
       return;
     } else {
       res.redirect("/");
